@@ -1,0 +1,33 @@
+# ---- Local malware corpus: NEVER commit ----
+/corpus/
+
+# ---- Generated pipeline output ----
+/results/
+
+# ---- Compiled pass plugins & test binaries ----
+*.o
+*.obj
+*.dylib
+*.so
+*.a
+/build/
+
+# ---- LLVM IR dumps from testing ----
+*.ll
+*.bc
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+
+# ---- LaTeX build junk ----
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+
+# ---- OS ----
+.DS_Store
