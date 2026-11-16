@@ -39,6 +39,48 @@ passes/
 
 ---
 
+## Building and running a pass
+
+Each pass follows the same three-step pattern. Run from inside the pass's own folder (e.g. `passes/sub/`).
+
+**1. Build the plugin:**
+```bash
+clang++ `llvm-config --cxxflags` -fPIC -shared -undefined dynamic_lookup <pass>_pass.cpp -o <pass>_pass.dylib
+```
+
+**2. Emit baseline IR from the test program:**
+```bash
+clang -S -emit-llvm -O0 -Xclang -disable-O0-optnone -fno-discard-value-names <pass>_test.c -o <pass>_test.ll
+```
+
+**3. Run the pass:**
+```bash
+opt -load-pass-plugin=./<pass>_pass.dylib -passes=<opt-name> -S <pass>_test.ll -o <pass>_test_out.ll
+```
+
+**4. Compile the obfuscated IR to an object file:**
+```bash
+clang -c <pass>_test_out.ll -o <pass>_test_out.o
+```
+
+For the COFF cross-compilation target used in the paper's pipeline:
+```bash
+clang --target=x86_64-w64-mingw32 -c <pass>_test_out.ll -o <pass>_test_out.o
+```
+
+Substituting the pass-specific values:
+
+| Pass | `<pass>` | `<opt-name>` |
+|------|---------|-------------|
+| SUB | `sub` | `subst` |
+| BCF | `bcf` | `bcf` |
+| FLA | `fla` | `fla` |
+| SOB | `sob` | `sob` |
+
+> **Note (macOS):** `-undefined dynamic_lookup` tells the linker to defer LLVM symbol resolution to load time. On Linux, replace it with `-Wl,--allow-shlib-undefined`.
+
+---
+
 ## Pass 1 — Instruction Substitution (`sub/`)
 
 **What it does.** Replaces every arithmetic or logical integer instruction with a longer sequence that computes the exact same value. Each rule turns one instruction into two to four. The control-flow graph and all data constants are left completely untouched — only the instructions inside each block change.
