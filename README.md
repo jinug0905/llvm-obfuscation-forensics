@@ -7,7 +7,7 @@
 This repository contains the full reproducible pipeline for the course project.
 Everything in the pipeline is **static analysis only** — malware source files are compiled to object files (`.o`) and never linked, executed, or run in any environment. The corpus is not committed to this repository (see [Corpus](#corpus) below).
 
-The four obfuscation passes are inspired by the original [Obfuscator-LLVM](https://github.com/obfuscator-llvm/obfuscator) project and reimplemented from scratch for the LLVM 22 new pass manager API.
+Three of the four obfuscation passes (SUB, BCF, FLA) are reimplementations of techniques from the original [Obfuscator-LLVM](https://github.com/obfuscator-llvm/obfuscator) project, ported from scratch to the LLVM 22 new pass manager API. The fourth pass (SOB — string/constant obfuscation) is an original contribution of this project.
 
 Special thanks to [@aahmadnejad](https://github.com/aahmadnejad) for generously sharing the malware source samples used in this study.
 
