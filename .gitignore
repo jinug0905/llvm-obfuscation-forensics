@@ -2,7 +2,11 @@
 /corpus/
 
 # ---- Generated pipeline output ----
-/results/
+/results/bin/
+/results/ir/
+
+# --- personal study backup ---
+/passes_save/
 
 # ---- Compiled pass plugins & test binaries ----
 *.o
@@ -31,3 +35,10 @@ __pycache__/
 
 # ---- OS ----
 .DS_Store
+
+# --- reports ---
+*.tex
+*.bib
+
+# --- results pef ---
+*.pdf
