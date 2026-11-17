@@ -1,9 +1,15 @@
-# ---- Local malware corpus: NEVER commit ----
-/corpus/
+# ---- Local malware corpus: real source excluded; _placeholder.cpp stubs committed ----
+corpus/**
+!corpus/*/
+!corpus/**/_placeholder.cpp
 
-# ---- Generated pipeline output ----
-/results/bin/
-/results/ir/
+# ---- Generated pipeline output: real binaries/IR excluded; .gitkeep stubs committed ----
+results/bin/**
+!results/bin/**/
+!results/bin/**/.gitkeep
+results/ir/**
+!results/ir/**/
+!results/ir/**/.gitkeep
 
 # --- personal study backup ---
 /passes_save/
